@@ -11,223 +11,411 @@ import {
   Hash,
   Lightbulb,
   ArrowRightCircle,
-  AlertTriangle
 } from 'lucide-react';
+import DemoBanner from '@/components/DemoBanner';
+import { useToast } from '@/components/ToastProvider';
+import Badge from '@/components/Badge';
+import Card from '@/components/Card';
+import Button from '@/components/Button';
+import ProgressBar from '@/components/ProgressBar';
 
 export default function Insights() {
+  const { showToast } = useToast();
+  
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    showToast('Search functionality is not available in demo mode', 'info');
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Demo Mode Banner */}
-      <div className="sticky top-16 z-40 w-full bg-amber-50 border-b border-amber-200">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-2 flex items-center justify-center gap-2">
-          <AlertTriangle className="h-4 w-4 text-amber-500" />
-          <p className="text-sm text-amber-800">
-            Demo Mode: AI Agents are not functional. This is a UI prototype only.
-          </p>
-        </div>
-      </div>
+      <DemoBanner message="Demo Mode: AI Agents are not functional. This is a UI prototype only." />
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-8 gap-4">
-          <h1 className="text-2xl font-bold text-gray-900">AI Insights</h1>
-          <div className="relative max-w-md w-full">
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <Search className="h-5 w-5 text-gray-400" />
-            </div>
-            <input 
-              type="text" 
-              className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm cursor-not-allowed" 
-              placeholder="Search insights..." 
-              disabled
-              aria-label="Search is disabled in demo mode"
-              title="Search is disabled in demo mode"
-            />
-            <div className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-gray-400 pointer-events-none">
-              Demo Mode
+      {/* Header */}
+      <header className="bg-white border-b border-gray-200 py-6">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between">
+            <h1 className="text-2xl font-bold text-gray-900 mb-4 md:mb-0">AI-Powered Insights</h1>
+            
+            <div className="flex flex-col sm:flex-row gap-4">
+              <form onSubmit={handleSearch} className="relative">
+                <input 
+                  type="text" 
+                  placeholder="Search insights..." 
+                  className="w-full sm:w-64 pl-10 pr-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  disabled
+                />
+                <Search className="absolute left-3 top-2.5 h-4 w-4 text-gray-400" />
+              </form>
+              
+              <div className="flex gap-2">
+                <Button 
+                  variant="outline" 
+                  size="sm"
+                  icon={<Filter className="h-4 w-4" />}
+                  isDemo
+                >
+                  Filter
+                </Button>
+                <Button 
+                  variant="outline"
+                  size="sm"
+                  className="relative"
+                  isDemo
+                >
+                  Sort
+                  <ChevronDown className="h-4 w-4 ml-1" />
+                </Button>
+              </div>
             </div>
           </div>
         </div>
-        
-        {/* AI Agents Filter */}
-        <div className="mb-10">
-          <h2 className="text-lg font-medium text-gray-900 mb-4 flex items-center gap-2">
-            <Brain className="h-5 w-5 text-blue-600" /> 
-            Filter by AI Agent
-            <span className="text-xs text-blue-600 px-2 py-0.5 bg-blue-100 rounded-full ml-2">Demo</span>
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      </header>
+
+      <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* AI Agents Section */}
+        <section className="mb-12">
+          <h2 className="text-xl font-semibold text-gray-900 mb-6">Your AI Agents</h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { name: 'Warren AI', specialty: 'Value Investing', icon: <BarChart3 className="h-5 w-5" /> },
-              { name: 'Catherine AI', specialty: 'Innovation Trends', icon: <TrendingUp className="h-5 w-5" /> },
-              { name: 'Michael AI', specialty: 'Market Timing', icon: <Zap className="h-5 w-5" /> },
-              { name: 'Ray AI', specialty: 'Risk Management', icon: <ShieldAlert className="h-5 w-5" /> }
+              { 
+                name: 'Warren', 
+                role: 'Value Investor', 
+                icon: DollarSign,
+                active: true,
+                color: 'bg-blue-100 text-blue-600',
+                insights: 12,
+                accuracy: 87
+              },
+              { 
+                name: 'Catherine', 
+                role: 'Growth Investor', 
+                icon: TrendingUp,
+                active: true,
+                color: 'bg-green-100 text-green-600',
+                insights: 15,
+                accuracy: 84
+              },
+              { 
+                name: 'Michael', 
+                role: 'Technical Analyst', 
+                icon: BarChart3,
+                active: true,
+                color: 'bg-purple-100 text-purple-600',
+                insights: 8,
+                accuracy: 81
+              },
+              { 
+                name: 'Satoshi', 
+                role: 'On-Chain Analyst', 
+                icon: Hash,
+                active: false,
+                color: 'bg-amber-100 text-amber-600',
+                insights: 0,
+                accuracy: 0
+              },
             ].map((agent, index) => (
-              <div 
+              <Card 
                 key={index} 
-                className="bg-white p-5 rounded-xl border border-gray-200 hover:border-blue-300 hover:shadow-md transition-all cursor-not-allowed relative group"
+                isDemo 
+                demoText={agent.active ? "Simulated Agent" : "Inactive in Demo"} 
+                className="hover:shadow-md transition-shadow"
               >
-                <div className="flex items-center justify-between mb-3">
-                  <div className="flex items-center gap-3">
-                    <div className={`h-10 w-10 rounded-full flex items-center justify-center ${
-                      index === 0 ? 'bg-blue-100 text-blue-600' : 
-                      index === 1 ? 'bg-purple-100 text-purple-600' :
-                      index === 2 ? 'bg-green-100 text-green-600' :
-                      'bg-amber-100 text-amber-600'
-                    }`}>
-                      {agent.icon}
+                <div className="flex items-start justify-between mb-4">
+                  <div className="flex items-center">
+                    <div className={`w-10 h-10 rounded-full ${agent.color} flex items-center justify-center`}>
+                      <agent.icon className="h-5 w-5" />
                     </div>
-                    <div>
+                    <div className="ml-3">
                       <h3 className="font-medium text-gray-900">{agent.name}</h3>
-                      <p className="text-sm text-gray-500">{agent.specialty}</p>
+                      <p className="text-sm text-gray-500">{agent.role}</p>
                     </div>
                   </div>
-                  <div className={`h-3 w-3 rounded-full ${index === 0 ? 'bg-green-500' : 'bg-gray-300'}`}></div>
+                  <Badge variant={agent.active ? "success" : "danger"} size="sm">
+                    {agent.active ? "Active" : "Inactive"}
+                  </Badge>
                 </div>
-                <div className="mt-3 flex justify-end">
-                  <span className="text-xs text-gray-400">62 insights generated</span>
-                </div>
-                <div className="absolute inset-0 hidden group-hover:flex items-center justify-center bg-white/80 backdrop-blur-sm rounded-xl">
-                  <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-lg text-sm font-medium">Demo Agent - Not Active</span>
-                </div>
-              </div>
+                
+                {agent.active ? (
+                  <>
+                    <div className="grid grid-cols-2 gap-2 mb-3">
+                      <div className="bg-gray-50 p-2 rounded">
+                        <p className="text-xs text-gray-500">Insights</p>
+                        <p className="font-medium">{agent.insights}</p>
+                      </div>
+                      <div className="bg-gray-50 p-2 rounded">
+                        <p className="text-xs text-gray-500">Accuracy</p>
+                        <p className="font-medium">{agent.accuracy}%</p>
+                      </div>
+                    </div>
+                    <Button 
+                      variant="outline" 
+                      size="sm" 
+                      className="w-full"
+                      icon={<Eye className="h-4 w-4" />}
+                      isDemo
+                    >
+                      View Insights
+                    </Button>
+                  </>
+                ) : (
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    className="w-full" 
+                    isDemo
+                  >
+                    Activate Agent
+                  </Button>
+                )}
+              </Card>
             ))}
           </div>
-        </div>
+        </section>
         
-        {/* Latest Insights */}
-        <div className="mb-10">
-          <h2 className="text-lg font-medium text-gray-900 mb-4 flex items-center gap-2">
-            <Lightbulb className="h-5 w-5 text-amber-500" /> 
-            Latest Insights
-            <span className="text-xs text-amber-600 px-2 py-0.5 bg-amber-100 rounded-full ml-2">Simulated</span>
-          </h2>
-          <div className="space-y-4">
+        {/* Recent Insights */}
+        <section className="mb-12">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-xl font-semibold text-gray-900">Recent Insights</h2>
+            <Button 
+              variant="outline" 
+              size="sm"
+              isDemo
+            >
+              View All
+            </Button>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
               {
-                title: 'Bitcoin Accumulation Patterns Suggest Bullish Momentum',
-                description: 'On-chain analysis shows strong accumulation from long-term holders despite recent market volatility. Historical patterns indicate potential upside in the next 30-45 days.',
-                agent: 'Warren AI',
-                score: 92,
-                time: '2 hours ago',
-                tags: ['BTC', 'On-Chain', 'Accumulation']
+                title: 'Bitcoin showing bullish divergence',
+                description: 'Technical indicators suggest a potential reversal pattern forming on BTC. MACD shows positive divergence, while RSI is rebounding from oversold conditions.',
+                category: 'Technical',
+                confidence: 87,
+                timestamp: '2h ago',
+                agent: 'Michael',
+                tickers: ['BTC']
               },
               {
-                title: 'Layer-2 Projects Show Promising Growth Metrics',
-                description: 'Transaction volumes on Ethereum L2 solutions have increased by 327% over the past quarter. Both Arbitrum and Optimism are showing strong developer activity and increasing TVL.',
-                agent: 'Catherine AI',
-                score: 88,
-                time: '5 hours ago',
-                tags: ['L2', 'Scaling', 'ETH']
+                title: 'DeFi tokens undervalued relative to TVL',
+                description: 'Several DeFi protocols are showing significant value discrepancies when comparing market cap to total value locked (TVL). These tokens may represent buying opportunities.',
+                category: 'Fundamental',
+                confidence: 82,
+                timestamp: '5h ago',
+                agent: 'Catherine',
+                tickers: ['AAVE', 'UNI', 'CRV']
               },
               {
-                title: 'Market Sentiment Analysis: Fear & Greed Index',
-                description: 'Current market sentiment registers at "Extreme Fear" (22/100), historically a strong counter-indicator and potential buying opportunity for long-term positions.',
-                agent: 'Michael AI',
-                score: 85,
-                time: '8 hours ago',
-                tags: ['Sentiment', 'Fear & Greed', 'Counter-Trading']
-              }
+                title: 'Ethereum L2 adoption accelerating',
+                description: 'On-chain metrics show increasing adoption of Ethereum L2 solutions, with transaction counts rising 40% month-over-month. This could drive value to L2 ecosystem tokens.',
+                category: 'On-Chain',
+                confidence: 91,
+                timestamp: '1d ago',
+                agent: 'Warren',
+                tickers: ['ETH', 'OP', 'ARB']
+              },
             ].map((insight, index) => (
-              <div key={index} className="bg-white p-6 rounded-xl border border-gray-200 hover:shadow-md transition-all relative group">
-                <div className="flex flex-col md:flex-row md:items-center gap-4 mb-4">
-                  <div className="flex-1">
-                    <div className="flex items-start gap-2">
-                      <h3 className="font-medium text-gray-900">{insight.title}</h3>
-                      <span className={`shrink-0 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                        insight.score >= 90 ? 'bg-green-100 text-green-800' : 
-                        insight.score >= 80 ? 'bg-blue-100 text-blue-800' : 
-                        'bg-amber-100 text-amber-800'
-                      }`}>
-                        {insight.score}
-                      </span>
-                    </div>
-                    <p className="text-gray-600 text-sm mt-2">{insight.description}</p>
+              <Card 
+                key={index} 
+                isDemo
+                demoText="Simulated Insight"
+                className="flex flex-col h-full"
+              >
+                <div className="mb-3">
+                  <div className="flex items-start justify-between mb-2">
+                    <h3 className="font-medium text-gray-900">{insight.title}</h3>
+                    <Badge 
+                      variant={
+                        insight.category === 'Technical' ? 'primary' : 
+                        insight.category === 'Fundamental' ? 'info' : 
+                        insight.category === 'On-Chain' ? 'warning' : 'success'
+                      } 
+                      size="sm"
+                    >
+                      {insight.category}
+                    </Badge>
                   </div>
+                  <p className="text-sm text-gray-600 mb-4">{insight.description}</p>
                 </div>
-                <div className="flex flex-wrap items-center justify-between gap-2">
-                  <div className="flex flex-wrap gap-1.5">
-                    {insight.tags.map((tag, tagIndex) => (
-                      <span key={tagIndex} className="bg-gray-100 text-gray-800 text-xs px-2.5 py-0.5 rounded-full">
-                        {tag}
+                
+                <div className="mt-auto">
+                  <div className="flex flex-wrap gap-2 mb-3">
+                    {insight.tickers.map((ticker, i) => (
+                      <span key={i} className="px-2 py-1 text-xs font-medium bg-gray-100 text-gray-800 rounded">
+                        ${ticker}
                       </span>
                     ))}
                   </div>
-                  <div className="flex items-center gap-4">
-                    <span className="text-sm text-gray-500">{insight.time}</span>
-                    <span className="text-sm font-medium text-blue-600">{insight.agent}</span>
-                    <button className="text-blue-600 hover:text-blue-800 text-sm font-medium flex items-center cursor-not-allowed" title="Demo Mode">
-                      Read Analysis <ArrowRightCircle className="h-4 w-4 ml-1" />
-                    </button>
+                  
+                  <div className="flex items-center justify-between text-sm text-gray-500">
+                    <div className="flex items-center gap-1">
+                      <Clock className="h-3.5 w-3.5" />
+                      <span>{insight.timestamp}</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="font-medium">{insight.confidence}%</span>
+                      <span>by {insight.agent}</span>
+                    </div>
+                  </div>
+                  
+                  <div className="mt-4">
+                    <Button 
+                      variant="outline" 
+                      size="sm" 
+                      className="w-full"
+                      icon={<ArrowRightCircle className="h-4 w-4" />}
+                      isDemo
+                    >
+                      Explore Insight
+                    </Button>
                   </div>
                 </div>
-                <div className="absolute inset-0 hidden group-hover:flex items-center justify-center bg-white/80 backdrop-blur-sm rounded-xl">
-                  <div className="px-4 py-2 bg-blue-100 text-blue-800 rounded-lg">
-                    This is a simulated insight (Demo Mode)
-                  </div>
-                </div>
-              </div>
+              </Card>
             ))}
           </div>
-          <div className="mt-4 flex justify-center">
-            <button className="text-blue-600 hover:text-blue-800 flex items-center gap-2 px-4 py-2 border border-blue-300 rounded-md bg-white cursor-not-allowed" title="Demo Mode">
-              Load More Insights <AlertTriangle className="h-3 w-3 text-amber-500" />
-            </button>
-          </div>
-        </div>
+        </section>
         
-        {/* Explore Insights */}
-        <div>
-          <h2 className="text-lg font-medium text-gray-900 mb-4 flex items-center gap-2">
-            <Compass className="h-5 w-5 text-purple-600" />
-            Explore Insights by Category
-            <span className="text-xs text-purple-600 px-2 py-0.5 bg-purple-100 rounded-full ml-2">Demo Categories</span>
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {[
-              { name: 'Market Analysis', count: 247, icon: <BarChart3 className="h-6 w-6 text-blue-500" />, color: 'blue' },
-              { name: 'DeFi Opportunities', count: 142, icon: <BarChart3 className="h-6 w-6 text-green-500" />, color: 'green' },
-              { name: 'Technical Analysis', count: 194, icon: <BarChart3 className="h-6 w-6 text-purple-500" />, color: 'purple' },
-              { name: 'Risk Assessment', count: 118, icon: <BarChart3 className="h-6 w-6 text-red-500" />, color: 'red' }
-            ].map((category, index) => (
-              <div 
-                key={index} 
-                className={`bg-${category.color}-50 p-5 rounded-xl border border-${category.color}-100 hover:border-${category.color}-300 hover:shadow-md transition-all relative group cursor-not-allowed`}
-                style={{
-                  background: index === 0 ? 'rgb(239 246 255)' : 
-                             index === 1 ? 'rgb(240 253 244)' : 
-                             index === 2 ? 'rgb(243 232 255)' : 
-                             'rgb(254 242 242)',
-                  borderColor: index === 0 ? 'rgb(191 219 254)' : 
-                               index === 1 ? 'rgb(187 247 208)' : 
-                               index === 2 ? 'rgb(216 180 254)' : 
-                               'rgb(254 202 202)',
-                }}
-              >
-                <div className="flex items-center gap-3 mb-3">
-                  {category.icon}
-                  <h3 className="font-medium text-gray-900">{category.name}</h3>
-                </div>
-                <div className="flex justify-between items-end">
-                  <div>
-                    <p className="text-2xl font-bold text-gray-900">{category.count}</p>
-                    <p className="text-sm text-gray-500">insights available</p>
+        {/* Market Overview */}
+        <section>
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-xl font-semibold text-gray-900">Market Overview</h2>
+            <div className="flex gap-2">
+              <Badge variant="success" size="sm">Bullish</Badge>
+              <Badge variant="warning" size="sm">High Volatility</Badge>
+            </div>
+          </div>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <Card 
+              title="Market Sentiment" 
+              isDemo 
+              demoText="Simulated Data"
+              className="lg:col-span-2"
+            >
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+                <div className="bg-green-50 border border-green-100 rounded-lg p-4">
+                  <div className="flex items-center justify-between mb-2">
+                    <h3 className="font-medium text-gray-900">Fear & Greed Index</h3>
+                    <Badge variant="success">67 - Greed</Badge>
                   </div>
-                  <ArrowRightCircle className={`h-6 w-6 text-${category.color}-500`} style={{
-                    color: index === 0 ? 'rgb(59 130 246)' : 
-                            index === 1 ? 'rgb(34 197 94)' : 
-                            index === 2 ? 'rgb(168 85 247)' : 
-                            'rgb(239 68 68)',
-                  }} />
+                  <ProgressBar value={67} color="success" className="mb-2" />
+                  <p className="text-sm text-gray-600">Sentiment is shifting positive, historically a good time to accumulate assets.</p>
                 </div>
-                <div className="absolute inset-0 hidden group-hover:flex items-center justify-center bg-white/80 backdrop-blur-sm rounded-xl">
-                  <span className="px-3 py-1 bg-gray-800 text-white rounded-lg text-sm">Demo Category</span>
+                
+                <div className="bg-blue-50 border border-blue-100 rounded-lg p-4">
+                  <div className="flex items-center justify-between mb-2">
+                    <h3 className="font-medium text-gray-900">Institutional Flows</h3>
+                    <Badge variant="primary">Bullish</Badge>
+                  </div>
+                  <ProgressBar value={75} color="primary" className="mb-2" />
+                  <p className="text-sm text-gray-600">Institutional investors are accumulating in spot markets and derivatives.</p>
                 </div>
               </div>
-            ))}
+              
+              <div className="bg-gray-50 rounded-lg p-4 border border-dashed border-gray-200">
+                <h3 className="font-medium text-gray-900 mb-2">Key Signals</h3>
+                <ul className="space-y-2">
+                  <li className="flex items-start gap-2 text-sm">
+                    <div className="h-5 w-5 rounded-full bg-green-100 text-green-600 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <TrendingUp className="h-3 w-3" />
+                    </div>
+                    <span>Bitcoin spot ETF inflows exceeded $250M for the third consecutive day</span>
+                  </li>
+                  <li className="flex items-start gap-2 text-sm">
+                    <div className="h-5 w-5 rounded-full bg-green-100 text-green-600 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <Lightbulb className="h-3 w-3" />
+                    </div>
+                    <span>Ethereum options market pricing in 40% chance of ETF approval in Q3</span>
+                  </li>
+                  <li className="flex items-start gap-2 text-sm">
+                    <div className="h-5 w-5 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <ShieldAlert className="h-3 w-3" />
+                    </div>
+                    <span>DeFi TVL shows signs of recovery after 3-month decline</span>
+                  </li>
+                </ul>
+              </div>
+            </Card>
+            
+            <Card 
+              title="AI Agent Consensus" 
+              isDemo 
+              demoText="Simulated Analysis"
+              className="lg:col-span-1"
+            >
+              <div className="space-y-4">
+                <div>
+                  <div className="flex items-center justify-between mb-2">
+                    <h3 className="text-sm font-medium text-gray-900">Bitcoin (BTC)</h3>
+                    <Badge variant="success" size="sm">Strong Buy</Badge>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="flex-grow">
+                      <ProgressBar value={80} color="success" size="sm" />
+                    </div>
+                    <span className="text-sm font-medium">80%</span>
+                  </div>
+                  <p className="text-xs text-gray-500 mt-1">3/3 agents bullish</p>
+                </div>
+                
+                <div>
+                  <div className="flex items-center justify-between mb-2">
+                    <h3 className="text-sm font-medium text-gray-900">Ethereum (ETH)</h3>
+                    <Badge variant="success" size="sm">Buy</Badge>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="flex-grow">
+                      <ProgressBar value={67} color="success" size="sm" />
+                    </div>
+                    <span className="text-sm font-medium">67%</span>
+                  </div>
+                  <p className="text-xs text-gray-500 mt-1">2/3 agents bullish</p>
+                </div>
+                
+                <div>
+                  <div className="flex items-center justify-between mb-2">
+                    <h3 className="text-sm font-medium text-gray-900">Solana (SOL)</h3>
+                    <Badge variant="warning" size="sm">Neutral</Badge>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="flex-grow">
+                      <ProgressBar value={50} color="warning" size="sm" />
+                    </div>
+                    <span className="text-sm font-medium">50%</span>
+                  </div>
+                  <p className="text-xs text-gray-500 mt-1">1/3 agents bullish</p>
+                </div>
+                
+                <div>
+                  <div className="flex items-center justify-between mb-2">
+                    <h3 className="text-sm font-medium text-gray-900">DeFi Sector</h3>
+                    <Badge variant="success" size="sm">Buy</Badge>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="flex-grow">
+                      <ProgressBar value={75} color="success" size="sm" />
+                    </div>
+                    <span className="text-sm font-medium">75%</span>
+                  </div>
+                  <p className="text-xs text-gray-500 mt-1">2/3 agents bullish</p>
+                </div>
+                
+                <Button 
+                  variant="primary" 
+                  size="sm" 
+                  className="w-full mt-2"
+                  isDemo
+                >
+                  Full Market Analysis
+                </Button>
+              </div>
+            </Card>
           </div>
-        </div>
-      </div>
+        </section>
+      </main>
     </div>
   );
 }

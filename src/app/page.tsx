@@ -3,19 +3,21 @@
 import React from 'react';
 import Link from 'next/link';
 import { ArrowRight, BarChart3, Brain, Shield, TrendingUp, Zap, AlertTriangle } from 'lucide-react';
+import DemoBanner from '@/components/DemoBanner';
+import { useToast } from '@/components/ToastProvider';
 
 export default function Home() {
+  const { showToast } = useToast();
+  
+  const handleGetStarted = (e: React.MouseEvent) => {
+    e.preventDefault();
+    showToast('Registration is not available in demo mode', 'warning');
+  };
+
   return (
     <main className="flex min-h-screen flex-col">
       {/* Demo Mode Banner */}
-      <div className="sticky top-16 z-40 w-full bg-amber-50 border-b border-amber-200">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-2 flex items-center justify-center gap-2">
-          <AlertTriangle className="h-4 w-4 text-amber-500" />
-          <p className="text-sm text-amber-800">
-            Demo Mode: This is a UI prototype. Buttons and features are non-functional.
-          </p>
-        </div>
-      </div>
+      <DemoBanner message="Demo Mode: This is a UI prototype. Buttons and features are non-functional." />
 
       {/* Hero Section */}
       <section className="relative bg-gradient-to-r from-blue-600 to-indigo-800 py-20 text-white">
@@ -33,10 +35,7 @@ export default function Home() {
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link 
                   href="#" 
-                  onClick={(e) => {
-                    e.preventDefault();
-                    alert('Demo Mode: Registration not available');
-                  }}
+                  onClick={handleGetStarted}
                   className="bg-white text-blue-600 hover:bg-blue-50 px-6 py-3 rounded-md font-medium text-center relative group"
                 >
                   <span className="flex items-center justify-center">
@@ -272,10 +271,7 @@ export default function Home() {
           </p>
           <button 
             className="px-8 py-4 bg-white text-blue-900 hover:bg-blue-50 rounded-lg font-medium inline-flex items-center justify-center transition-all gap-2 cursor-not-allowed relative"
-            onClick={(e) => {
-              e.preventDefault();
-              alert('Demo Mode: Registration not available');
-            }}
+            onClick={handleGetStarted}
           >
             Get Started Now 
             <div className="absolute -right-2 -top-2 bg-amber-400 text-amber-800 text-xs px-1 py-0.5 rounded-full">
