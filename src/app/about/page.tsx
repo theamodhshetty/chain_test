@@ -1,9 +1,8 @@
 "use client";
 
 import React from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
-import { Brain, Code, Database, LineChart, Shield, Users, ArrowUpRight, AlertTriangle } from 'lucide-react';
+import { AlertTriangle } from 'lucide-react';
 
 export default function About() {
   return (
@@ -42,8 +41,8 @@ export default function About() {
           <div className="max-w-3xl mx-auto">
             <div className="mb-16">
               <h2 className="text-2xl font-bold text-gray-900 mb-6">Our Vision</h2>
-              <p className="text-lg text-gray-600 mb-4">
-                At ChainInsight, we envision a future where crypto investing is accessible, informed, and driven by cutting-edge AI analysis. We're building the bridge between complex blockchain data and actionable insights.
+              <p className="text-lg text-gray-600">
+                At ChainInsight, we envision a future where crypto investing is accessible, informed, and driven by cutting-edge AI analysis. We&apos;re building the bridge between complex blockchain data and actionable insights.
               </p>
               <p className="text-lg text-gray-600">
                 By combining the power of artificial intelligence with deep crypto market expertise, we aim to democratize access to sophisticated investment strategies that were once exclusive to institutions and wealth management firms.

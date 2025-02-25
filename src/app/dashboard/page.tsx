@@ -1,9 +1,8 @@
 "use client";
 
 import React from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
-import { BarChart3, Briefcase, ChevronDown, Clock, CreditCard, DollarSign, ExternalLink, Eye, Globe, LineChart, Plus, RefreshCw, Search, Settings, TrendingDown, TrendingUp, Info, AlertTriangle } from 'lucide-react';
+import { BarChart3, Briefcase, ChevronDown, Clock, CreditCard, ExternalLink, Eye, RefreshCw, Settings, TrendingDown, TrendingUp, AlertTriangle } from 'lucide-react';
 
 export default function Dashboard() {
   return (

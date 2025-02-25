@@ -3,8 +3,8 @@
 import React from 'react';
 import Link from 'next/link';
 import { 
-  BarChart3, Brain, ChevronDown, Clock, Filter, LineChart, Search, 
-  TrendingUp, Zap, InfoIcon, ArrowUpRight, Eye, BookmarkIcon, Share2,
+  BarChart3, Brain, ChevronDown, Clock, Filter, Search, 
+  TrendingUp, Zap, Eye, 
   ShieldAlert,
   Compass,
   DollarSign,
@@ -186,9 +186,9 @@ export default function Insights() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {[
               { name: 'Market Analysis', count: 247, icon: <BarChart3 className="h-6 w-6 text-blue-500" />, color: 'blue' },
-              { name: 'DeFi Opportunities', count: 142, icon: <DollarSign className="h-6 w-6 text-green-500" />, color: 'green' },
-              { name: 'Technical Analysis', count: 194, icon: <Hash className="h-6 w-6 text-purple-500" />, color: 'purple' },
-              { name: 'Risk Assessment', count: 118, icon: <ShieldAlert className="h-6 w-6 text-red-500" />, color: 'red' }
+              { name: 'DeFi Opportunities', count: 142, icon: <BarChart3 className="h-6 w-6 text-green-500" />, color: 'green' },
+              { name: 'Technical Analysis', count: 194, icon: <BarChart3 className="h-6 w-6 text-purple-500" />, color: 'purple' },
+              { name: 'Risk Assessment', count: 118, icon: <BarChart3 className="h-6 w-6 text-red-500" />, color: 'red' }
             ].map((category, index) => (
               <div 
                 key={index} 
