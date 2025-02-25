@@ -7,7 +7,7 @@ import Badge from './Badge';
 import Button from './Button';
 
 // Mock news data
-const mockNews = [
+const mockNews: NewsItem[] = [
   {
     id: 1,
     title: 'Bitcoin ETF Inflows Reach $500M in Single Day, Setting New Record',
