@@ -1,14 +1,12 @@
 "use client";
 
 import React, { ButtonHTMLAttributes, ReactNode } from 'react';
-import { AlertTriangle } from 'lucide-react';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
   variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger';
   size?: 'sm' | 'md' | 'lg';
   isLoading?: boolean;
-  isDemo?: boolean;
   icon?: ReactNode;
   className?: string;
 }
@@ -18,7 +16,6 @@ export default function Button({
   variant = 'primary',
   size = 'md',
   isLoading = false,
-  isDemo = false,
   icon,
   className = '',
   ...props
@@ -42,17 +39,13 @@ export default function Button({
     danger: "bg-red-600 text-white hover:bg-red-700 focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
   };
   
-  // Demo styles
-  const demoStyles = isDemo ? "cursor-not-allowed opacity-90" : "";
-  
   // Combined styles
-  const buttonStyles = `${baseStyles} ${sizeStyles[size]} ${variantStyles[variant]} ${demoStyles} ${className}`;
+  const buttonStyles = `${baseStyles} ${sizeStyles[size]} ${variantStyles[variant]} ${className}`;
   
   return (
     <button
       className={buttonStyles}
-      disabled={isLoading || isDemo || props.disabled}
-      title={isDemo ? "Demo Mode - Not Functional" : props.title}
+      disabled={isLoading || props.disabled}
       {...props}
     >
       {isLoading ? (
@@ -65,13 +58,6 @@ export default function Button({
       ) : null}
       
       {children}
-      
-      {isDemo && (
-        <span className="absolute -right-2 -top-2 bg-amber-400 text-amber-800 text-xs px-1 py-0.5 rounded-full flex items-center">
-          <AlertTriangle className="h-3 w-3 mr-0.5" />
-          DEMO
-        </span>
-      )}
     </button>
   );
 } 

@@ -6,8 +6,6 @@ interface CardProps {
   children: ReactNode;
   title?: string | ReactNode;
   footer?: ReactNode;
-  isDemo?: boolean;
-  demoText?: string;
   className?: string;
   onClick?: () => void;
 }
@@ -16,8 +14,6 @@ export default function Card({
   children,
   title,
   footer,
-  isDemo = false,
-  demoText = "Demo Feature",
   className = '',
   onClick
 }: CardProps) {
@@ -41,15 +37,6 @@ export default function Card({
       {/* Card Body */}
       <div className="p-4 sm:p-6 relative">
         {children}
-        
-        {/* Demo Overlay */}
-        {isDemo && (
-          <div className="absolute inset-0 bg-white/80 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-            <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-lg text-sm font-medium">
-              {demoText}
-            </span>
-          </div>
-        )}
       </div>
       
       {/* Card Footer */}

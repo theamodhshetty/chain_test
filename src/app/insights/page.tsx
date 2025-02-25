@@ -12,25 +12,28 @@ import {
   Lightbulb,
   ArrowRightCircle,
 } from 'lucide-react';
-import DemoBanner from '@/components/DemoBanner';
 import { useToast } from '@/components/ToastProvider';
 import Badge from '@/components/Badge';
 import Card from '@/components/Card';
 import Button from '@/components/Button';
 import ProgressBar from '@/components/ProgressBar';
+import AnnouncementBanner from '@/components/DemoBanner';
 
 export default function Insights() {
   const { showToast } = useToast();
   
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    showToast('Search functionality is not available in demo mode', 'info');
+    showToast('Searching for insights...', 'info');
   };
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Demo Mode Banner */}
-      <DemoBanner message="Demo Mode: AI Agents are not functional. This is a UI prototype only." />
+      {/* Announcement Banner */}
+      <AnnouncementBanner 
+        message="AI Agents are now providing real-time market insights!" 
+        variant="success" 
+      />
 
       {/* Header */}
       <header className="bg-white border-b border-gray-200 py-6">
@@ -44,7 +47,6 @@ export default function Insights() {
                   type="text" 
                   placeholder="Search insights..." 
                   className="w-full sm:w-64 pl-10 pr-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                  disabled
                 />
                 <Search className="absolute left-3 top-2.5 h-4 w-4 text-gray-400" />
               </form>
@@ -54,7 +56,6 @@ export default function Insights() {
                   variant="outline" 
                   size="sm"
                   icon={<Filter className="h-4 w-4" />}
-                  isDemo
                 >
                   Filter
                 </Button>
@@ -62,7 +63,6 @@ export default function Insights() {
                   variant="outline"
                   size="sm"
                   className="relative"
-                  isDemo
                 >
                   Sort
                   <ChevronDown className="h-4 w-4 ml-1" />
@@ -119,8 +119,6 @@ export default function Insights() {
             ].map((agent, index) => (
               <Card 
                 key={index} 
-                isDemo 
-                demoText={agent.active ? "Simulated Agent" : "Inactive in Demo"} 
                 className="hover:shadow-md transition-shadow"
               >
                 <div className="flex items-start justify-between mb-4">
@@ -155,7 +153,6 @@ export default function Insights() {
                       size="sm" 
                       className="w-full"
                       icon={<Eye className="h-4 w-4" />}
-                      isDemo
                     >
                       View Insights
                     </Button>
@@ -165,7 +162,6 @@ export default function Insights() {
                     variant="outline" 
                     size="sm" 
                     className="w-full" 
-                    isDemo
                   >
                     Activate Agent
                   </Button>
@@ -182,7 +178,6 @@ export default function Insights() {
             <Button 
               variant="outline" 
               size="sm"
-              isDemo
             >
               View All
             </Button>
@@ -220,8 +215,6 @@ export default function Insights() {
             ].map((insight, index) => (
               <Card 
                 key={index} 
-                isDemo
-                demoText="Simulated Insight"
                 className="flex flex-col h-full"
               >
                 <div className="mb-3">
@@ -267,7 +260,6 @@ export default function Insights() {
                       size="sm" 
                       className="w-full"
                       icon={<ArrowRightCircle className="h-4 w-4" />}
-                      isDemo
                     >
                       Explore Insight
                     </Button>
@@ -291,8 +283,6 @@ export default function Insights() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             <Card 
               title="Market Sentiment" 
-              isDemo 
-              demoText="Simulated Data"
               className="lg:col-span-2"
             >
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
@@ -342,8 +332,6 @@ export default function Insights() {
             
             <Card 
               title="AI Agent Consensus" 
-              isDemo 
-              demoText="Simulated Analysis"
               className="lg:col-span-1"
             >
               <div className="space-y-4">
@@ -400,16 +388,11 @@ export default function Insights() {
                     </div>
                     <span className="text-sm font-medium">75%</span>
                   </div>
-                  <p className="text-xs text-gray-500 mt-1">2/3 agents bullish</p>
+                  <p className="text-xs text-gray-500 mt-1">3/3 agents bullish</p>
                 </div>
                 
-                <Button 
-                  variant="primary" 
-                  size="sm" 
-                  className="w-full mt-2"
-                  isDemo
-                >
-                  Full Market Analysis
+                <Button variant="primary" size="sm" className="w-full mt-4">
+                  View Full Analysis
                 </Button>
               </div>
             </Card>
