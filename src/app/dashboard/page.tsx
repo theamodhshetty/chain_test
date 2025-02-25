@@ -8,6 +8,9 @@ import ProgressBar from '@/components/ProgressBar';
 import Badge from '@/components/Badge';
 import Card from '@/components/Card';
 import Button from '@/components/Button';
+import PriceTracker from '@/components/PriceTracker';
+import Watchlist from '@/components/Watchlist';
+import NewsFeed from '@/components/NewsFeed';
 
 export default function Dashboard() {
   const { showToast } = useToast();
@@ -27,8 +30,12 @@ export default function Dashboard() {
               <h1 className="text-xl font-semibold text-gray-900">Dashboard</h1>
               <div className="hidden md:flex bg-gray-100 rounded-md">
                 <Button variant="primary" size="sm" className="rounded-l-md rounded-r-none">Overview</Button>
-                <Button variant="ghost" size="sm">Portfolio</Button>
-                <Button variant="ghost" size="sm">Insights</Button>
+                <Link href="/portfolio">
+                  <Button variant="ghost" size="sm">Portfolio</Button>
+                </Link>
+                <Link href="/insights">
+                  <Button variant="ghost" size="sm">Insights</Button>
+                </Link>
               </div>
             </div>
             <div className="flex items-center gap-2">
@@ -178,6 +185,9 @@ export default function Dashboard() {
               </div>
             </Card>
             
+            {/* News Feed */}
+            <NewsFeed maxItems={3} />
+            
             {/* Recent Activity */}
             <Card title="Recent Activity">
               <div className="space-y-4">
@@ -215,6 +225,11 @@ export default function Dashboard() {
           
           {/* Sidebar (1/3 width on large screens) */}
           <div className="space-y-6">
+            {/* Price Tracker */}
+            <PriceTracker maxItems={3} initiallyExpanded={false} />
+            
+            {/* Watchlist */}
+            <Watchlist />
             
             {/* Assets Overview */}
             <Card title="Assets Overview">
@@ -298,13 +313,15 @@ export default function Dashboard() {
                 >
                   Deposit
                 </Button>
-                <Button 
-                  variant="outline" 
-                  className="justify-start" 
-                  icon={<Briefcase className="h-4 w-4 text-blue-600" />}
-                >
-                  Portfolio
-                </Button>
+                <Link href="/portfolio" className="w-full">
+                  <Button 
+                    variant="outline" 
+                    className="justify-start w-full" 
+                    icon={<Briefcase className="h-4 w-4 text-blue-600" />}
+                  >
+                    Portfolio
+                  </Button>
+                </Link>
                 <Button 
                   variant="outline" 
                   className="justify-start" 
