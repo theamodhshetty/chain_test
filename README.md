@@ -1,8 +1,40 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ChainInsight
+
+ChainInsight merges Web3 with AI to revolutionize crypto investing through a multi-agent system. Our platform features ten specialized AI agents—modeled after legendary investors like Warren Buffett and Catherine Wood—that analyze on-chain data, calculate intrinsic values, assess market sentiment, and manage risk.
+
+This collaborative AI framework delivers tailored investment recommendations across diversified crypto assets, making sophisticated investment strategies accessible to everyday users through a simple, functional interface. ChainInsight eliminates decision paralysis by providing clear, data-driven insights that help investors multiply their wealth in the complex crypto ecosystem.
+
+## Features
+
+- **Multi-Agent AI System**: Ten specialized AI agents with different investment philosophies
+- **On-Chain Data Analysis**: Real-time analysis of blockchain transactions and trends
+- **Intrinsic Value Calculation**: Fundamental valuation of crypto assets
+- **Market Sentiment Analysis**: AI-powered social media and news sentiment tracking
+- **Risk Management**: Personalized risk assessment and portfolio optimization
+- **User-Friendly Interface**: Simple dashboard with clear investment recommendations
+
+## Tech Stack
+
+- Next.js 14 (App Router)
+- TypeScript
+- Tailwind CSS
+- Framer Motion for animations
+- Recharts for data visualization
+- Deployed on Vercel
 
 ## Getting Started
 
-First, run the development server:
+First, install the dependencies:
+
+```bash
+npm install
+# or
+yarn install
+# or
+pnpm install
+```
+
+Then, run the development server:
 
 ```bash
 npm run dev
@@ -10,27 +42,37 @@ npm run dev
 yarn dev
 # or
 pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Deploying to Vercel
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The easiest way to deploy this application is to use Vercel, the platform from the creators of Next.js.
 
-## Learn More
+1. Push your code to a GitHub repository
+2. Go to [Vercel](https://vercel.com) and sign up or log in
+3. Click "New Project" and import your repository
+4. Keep the default settings and click "Deploy"
 
-To learn more about Next.js, take a look at the following resources:
+Vercel will automatically build and deploy your application, providing you with a URL to access it.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Pages
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Home**: Landing page showcasing ChainInsight's features
+- **Dashboard**: Main user interface with portfolio overview and AI insights
+- **Insights**: Detailed AI-generated investment recommendations
+- **About**: Information about ChainInsight and the team
+- **Assets**: Crypto asset analysis and details
 
-## Deploy on Vercel
+## Further Development
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Implement user authentication
+- Connect to real crypto market data APIs
+- Develop the backend AI agent system
+- Add portfolio management features
+- Implement notifications for new insights
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## License
+
+MIT
